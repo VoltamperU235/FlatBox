@@ -5,7 +5,7 @@
 #define YELLOW pixels.Color(255,255,0)
 #define RED pixels.Color(255,0,0)
 #define BLUE pixels.Color(0,0,255)
-#define WHITE pixels.Color(155,155,155)
+#define WHITE pixels.Color(255,255,255)
 #define NONE pixels.Color(0,0,0)
 
 Servo myservo;
@@ -21,19 +21,27 @@ void SET_ALARM() {
   pixels.begin();
   myservo.attach(SERVO_PIN);
   myservo.write(91);
-  delay(333);
+  delay(111);
+}
+
+void Reset_Ring(){
+  for (int i = 0; i < NUMPIXELS; i++) {
+    pixels.setPixelColor(i, NONE);
+    pixels.show();
+  }
+  delay(55);
 }
 
 void Start_Ring() {
 
   for (int pos = 65; pos <= 115; pos += 1) {
     myservo.write(pos);
-    delay(15);
+    delay(3);
   }
 
   for (int pos = 115; pos >= 65; pos -= 1) {
     myservo.write(pos);
-    delay(15);
+    delay(3);
   }
 }
 
@@ -41,74 +49,69 @@ void SET_GREEN() {
   for (int i = 0; i < NUMPIXELS; i++) {
     pixels.setPixelColor(i, GREEN);
     pixels.show();   
-    delay(111);
+    delay(55);
   }
-   delay(333);
-  for (int i = 0; i < NUMPIXELS; i++) {
-    pixels.setPixelColor(i, NONE);
-    pixels.show();
-  }
-  delay(111);
+     delay(111);
+  Reset_Ring();
+
+  
 }
 
 void SET_RED() {
   for (int i = 0; i < NUMPIXELS; i++) {
     pixels.setPixelColor(i, RED);
     pixels.show();
-    delay(155);
+    delay(55);
   }
   Start_Ring();
-  for (int i = 0; i < NUMPIXELS; i++) {
-    pixels.setPixelColor(i, NONE);
-    pixels.show();
-  }
-  delay(111);
+  Reset_Ring();
 }
 
 void SET_ORANGE() {
   for (int i = 0; i < NUMPIXELS; i++) {
     pixels.setPixelColor(i, ORANGE);
     pixels.show();
-    delay(155);
+    delay(55);
   }
    Start_Ring();
-  for (int i = 0; i < NUMPIXELS; i++) {
-    pixels.setPixelColor(i, NONE);
-    pixels.show();
-  }
- delay(111);
+ Reset_Ring();
 }
 
 void SET_YELLOW() {
   for (int i = 0; i < NUMPIXELS; i++) {
     pixels.setPixelColor(i, YELLOW);
     pixels.show();
-    delay(111);
+    delay(55);
   }
-   delay(333);
-  for (int i = 0; i < NUMPIXELS; i++) {
-    pixels.setPixelColor(i, NONE);
-    pixels.show();
-  }
-  delay(111);
+   delay(111);
+  Reset_Ring();
 }
 
 void SET_DEFAULT() {
-  for (int i = 0; i < NUMPIXELS / 3; i++) {
-    pixels.setPixelColor(i, BLUE);
-    pixels.show();
-    delay(111);
-  }
-  for (int i = NUMPIXELS / 3; i < (NUMPIXELS / 3) * 2; i++) {
+  for (int i = 0; i < 3; i++) {
     pixels.setPixelColor(i, WHITE);
     pixels.show();
-    delay(111);
+    delay(55);
   }
-  for (int i = (NUMPIXELS / 3) * 2; i <= (NUMPIXELS / 3) * 3; i++) {
+  for (int i = 3; i < 7; i++) {
+    pixels.setPixelColor(i, BLUE);
+    pixels.show();
+    delay(55);
+  }
+  for (int i = 7; i <11; i++) {
+    pixels.setPixelColor(i, WHITE);
+    pixels.show(); 
+    delay(55);
+  }
+  for (int i = 11; i <15; i++) {
     pixels.setPixelColor(i, BLUE);
     pixels.show(); 
-    delay(111);
+    delay(55);
   }
+
+  pixels.setPixelColor(15, WHITE);
+    pixels.show(); 
+    delay(55);
   
 }
 
@@ -134,5 +137,6 @@ void ALARM_ESTATE(int ESTATE){
   }
   
 }
+
 
 

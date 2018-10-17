@@ -97,7 +97,7 @@ String TELEPHONE = "50257276772";
 bool SETT;
 volatile bool MOVEMENT = 0;
 bool SMS_E = LOW;
-
+String ALARM_SETED="";
 
 DHT dht(DHTPIN, DHTTYPE);
 
@@ -345,12 +345,14 @@ void loop() {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // BIENVENIDOS AL ESTADO "ALARMAS"//
     case ALARMS:
-    String ALARM_SETED="";
+     ALARM_SETED="";
       CONSTRUCTOR_AT = "";                                                    //Borramos cualquier String que tenga almacena nuestro constructor (Si no lo hacemos empieza a concatenar instrucciones a lo cerdo :v )
       mySerial.println(STRING_HORA_SIM800);
       HORA_ACTUAL_INT = decodeHour(STRING_HORA_SIM800);                       //Utilizamos la funcion decodeHour() para determinar el valor (Entero) de la hora actual.
-      HORA_DE_ENVIO = HORA_ACTUAL_INT + 1;                                    //Le sumamos uno para determinar de envio del siguiente mensaje, en este caso una hora despues. (Falta construir el comando para programarlo)
+      HORA_DE_ENVIO = HORA_ACTUAL_INT + 6;                                    //Le sumamos uno para determinar de envio del siguiente mensaje, en este caso una hora despues. (Falta construir el comando para programarlo)
       mySerial.println(HORA_DE_ENVIO);
+      if(HORA_DE_ENVIO != 0)
+      {
       if (HORA_DE_ENVIO > 23) {
         HORA_DE_ENVIO = 24 - HORA_DE_ENVIO;
       }
@@ -374,7 +376,10 @@ void loop() {
       {
          RETRY_SETED();
       }
-
+      }else
+      {
+      mySerial.println(F("II"));
+      }
 
       
       //sendData("AT+CALA=\"21:11:00\",2,0", 1111, 1);

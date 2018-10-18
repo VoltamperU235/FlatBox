@@ -349,12 +349,12 @@ void loop() {
       CONSTRUCTOR_AT = "";                                                    //Borramos cualquier String que tenga almacena nuestro constructor (Si no lo hacemos empieza a concatenar instrucciones a lo cerdo :v )
       mySerial.println(STRING_HORA_SIM800);
       HORA_ACTUAL_INT = decodeHour(STRING_HORA_SIM800);                       //Utilizamos la funcion decodeHour() para determinar el valor (Entero) de la hora actual.
-      HORA_DE_ENVIO = HORA_ACTUAL_INT + 6;                                    //Le sumamos uno para determinar de envio del siguiente mensaje, en este caso una hora despues. (Falta construir el comando para programarlo)
+      HORA_DE_ENVIO = HORA_ACTUAL_INT + 3;                                    //Le sumamos uno para determinar de envio del siguiente mensaje, en este caso una hora despues. (Falta construir el comando para programarlo)
       mySerial.println(HORA_DE_ENVIO);
       if(HORA_DE_ENVIO != 0)
       {
       if (HORA_DE_ENVIO > 23) {
-        HORA_DE_ENVIO = 24 - HORA_DE_ENVIO;
+        HORA_DE_ENVIO =  HORA_DE_ENVIO - 24;
       }
       if (HORA_DE_ENVIO < 10) {                                               //Empezamos a construir nuestro comando AT para programarle la hora del siguiente envio SMS
         CONSTRUCTOR_AT += Comando1_1;
